@@ -3,7 +3,7 @@
 	//recive parameter the path to a csv file
     $_GET["csv"];
 	$address_book = "C:/xampp/htdocs/address_book.csv";
-    $mdarray = array();
+    $sort_array = array();
 	$cities = array();
 
 	if (($handle = fopen($address_book, "r")) !== FALSE) {
@@ -12,7 +12,7 @@
 		
 		while (($data = fgetcsv($handle, 1000)) !== FALSE) {
 			array_push($sum, $data[0]);
-	     	array_push($mdarray, $data);
+	     	array_push($sort_array, $data);
 			$num = count($data);
 			
 			//echo "<p> $num fields in line <br /></p>\n";
@@ -57,16 +57,16 @@
 		
 		fclose($handle);
 
-		$last_name = array_column($mdarray, 1);
-		array_multisort($last_name, SORT_ASC, $mdarray);
+		$last_name = array_column($sort_array, 1);
+		array_multisort($last_name, SORT_ASC, $sort_array);
 		
-	    //var_dump($mdarray);
+	    //var_dump($sort_array);
 	   	      
 		  /* 
-		  foreach ($mdarray as $key => $row) {
+		  foreach ($sort_array as $key => $row) {
          $names[$key]  = $row[1];
 	 }
-	 array_multisort(array_column($mdarray, 1), SORT_ASC, $mdarray);
+	 array_multisort(array_column($sort_array, 1), SORT_ASC, $sort_array);
 	 */
 	 
 	
